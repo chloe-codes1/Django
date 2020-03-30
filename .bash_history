@@ -112,3 +112,8 @@ cd django_intro/
 ls
 python manage.py runserver 8080
 git status
+git add .
+git commit -m "Add Django template examples"
+git push origin master
+git push origin master
+git status
