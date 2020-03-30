@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<style>
+
+    h1 {
+        color: blue;
+    }
+</style>
+
+{% endblock %}
+
+
+{% block body %}
+    <!-- {# Template language 에서의 주석 #} -->
+    <h1> Post No. {{id}}</h1>
+    <p> {{content}}</p>
+    <p> {{content | length}}</p>
+    <p> {{content|truncatechars:10}}</p>
+    <hr>
+    {% for reply in replies %}
+        <p> {{forloop.counter}} {{reply}}</p>
+    {% endfor %}
+
+    <hr>
+
+    {% for reply in no_replies %}
+        <p> {{forloop.counter}} {{reply}}</p>
+        {% empty %}
+        <p> There's no reply ㅠ_ㅠ</p>
+    {% endfor %}
+    <hr>
+    {% if user == 'admin' %}
+        <p> Accessible</p>
+    {% else %}
+        <p> Inaccessible</p>
+    {% endif %}
+
+
+{% endblock %}

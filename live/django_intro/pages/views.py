@@ -54,3 +54,17 @@ def dinner(reqeust, menu, num):
         'num' : num,
     }
     return render(reqeust, 'dinner.html', context)
+
+def posts(request, id):
+    content = 'Life is short, you need python!'
+    replies = [ 'Thumbs up', 'Like your post', 'So informative!']
+    no_replies = []
+    user = 'admin'
+    context = {
+        'id':id,
+        'content': content,
+        'replies' : replies,
+        'no_replies': no_replies,
+        'user': user,
+    }
+    return render(request, 'posts.html', context)

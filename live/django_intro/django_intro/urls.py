@@ -28,5 +28,6 @@ urlpatterns = [
     #variable routing
     path('hi/<str:name>/', views.hi),
     path('add/<int:a>/<int:b>', views.add),
-    path('dinner/<str:menu>/<int:num>/', views.dinner)
+    path('dinner/<str:menu>/<int:num>/', views.dinner),
+    path('posts/<int:id>/', views.posts),
 ]

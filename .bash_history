@@ -97,3 +97,18 @@ git remote -v
 git status
 git add .
 git status
+git add .
+git status
+git commit -m "Initial commit"
+git config --global user.email "juhyun.kim@lindsey.edu"
+git config --global user.name "chloe-codes1"
+git commit -m "Initial commit"
+git push origin master
+git pull origin master
+ls
+cd live/
+ls
+cd django_intro/
+ls
+python manage.py runserver 8080
+git status
