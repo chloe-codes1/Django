@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<form action="/boards/complete/">
+    Title: <input type="text" name="title"> <br/>
+    Content: <input type="text" name="content"> <br/>
+    <input type="submit" value="submit">
+</form>
+
+{% endblock %}

@@ -4,6 +4,8 @@
 
 *.python_history
 
+*.env
+
 .c9/
 
 .cache/
