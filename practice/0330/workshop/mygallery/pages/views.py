@@ -12,7 +12,7 @@ def index(request):
 def gallery(request):
 
     category = request.GET.get('category')
-    response = requests.get(f'https://api.unsplash.com/search/photos?query={category}&client_id={key}').json()
+    response = requests.get(f'https://api.unsplash.com/search/photos?query={category}&per_page=1000&client_id={key}').json()
     photos = []
     length = response['total']
     for i in range(length):

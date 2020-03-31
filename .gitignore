@@ -6,6 +6,8 @@
 
 *.env
 
+*.sqlite3
+
 .c9/
 
 .cache/
