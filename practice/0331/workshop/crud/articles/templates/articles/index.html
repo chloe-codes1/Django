@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p class="float-right"><a href="/articles/new/" class="btn btn-primary">Add post</a></p>
+
+<h2>Posts</h2>
+
+{% for article in articles %}
+<div class="card text-white bg-secondary mb-3 w-100">
+  <div class="card-header"><h4>{{article.title}}</h4></div>
+  <div class="card-body">
+    <p class="card-title">{{article.content}}</p>
+  </div>
+</div>
+
+{% empty %}
+<h4 class="mt-4 text-center">We are sorry!</h4>
+<p class="text-center">There's no post</p>
+
+{% endfor %}
+
+{% endblock %}
