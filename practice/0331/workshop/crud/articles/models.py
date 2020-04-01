@@ -5,6 +5,7 @@ from django.db import models
 class Article(models.Model):
     title = models.CharField(max_length=20)
     content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __repr__(self):
         return f'Title: {self.title} & Content: {self.content}'
