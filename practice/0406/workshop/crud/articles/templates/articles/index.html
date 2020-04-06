@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="d-flex justify-content-between">
+  <h3 class="mt-3 mb-4 pl-2">Notes</h3>
+  <p><a class="btn btn-outline-primary mt-4 mr-2" href="{% url 'articles:new' %}" style='font-size:22px;'>Note down </a></p>
+</div>
+{% for article in articles reversed%}
+
+<a class="text-decoration-none" href="{% url 'articles:details' article.pk  %}" data-toggle="tooltip" data-placement="top" title="See Details">
+<div class="card hover text-white my-2 w-100"  onmouseover="this.style.backgroundColor='#868e96'" onmouseout="this.style.backgroundColor='#343A40'">
+  <div class="card-header d-flex justify-content-between"><span><h5 class="d-inline">{{article.title}}</h5></span> <p class="mb-0 pt-1">{{article.created_at|date:'Y-m-d H:i'}}</p></div>
+  <div class="card-body">
+    <p class="card-title">{{article.content|linebreaks}}</p>
+  </div>
+</div>
+<a/>
+{% empty %}
+<h4 class="mt-4 text-center">No posts yet!</h4>
+<p class="text-center ">Jot down any musings or thoughts.</p>
+
+{% endfor %}
+
+{% endblock %}
