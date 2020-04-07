@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block body %}
+    <h2>Detail</h2>
+    <hr>
+    <p ><a href="{% url 'articles:index' %}"> Back</a></p>
+    <h3>Post # {{article.pk}}</h3>
+    <h4>{{article.title}}</h4>
+    <p>Created at {{article.created_at|date:'Y-m-d H:i'}}</p>
+    <p>Updated at {{article.updated_at|date:'Y-m-d H:i'}}</p>
+    <hr>
+    <p>{{article.content|linebreaks}}</p>
+     <form action="{% url 'articles:update' article.pk %}" method="POST" class="d-inline">
+        {% csrf_token %}
+        <button class="btn btn-warning">수정</button>   
+    </form>
+
+    <form action="{% url 'articles:delete' article.pk %}" method="POST" class="d-inline">
+        {% csrf_token %}
+        <button class="btn btn-danger">삭제</button>   
+    </form>
+
+{% endblock  %}

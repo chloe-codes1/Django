@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load bootstrap4 %}
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Django Test</title>
+    {% bootstrap_css %}
+</head>
+<body>
+  <h1 class="text-center">CRUD with ModelForm</h1>
+    <div class="w-75 m-auto">
+    <hr>
+      {% block body %}
+
+      {% endblock %}
+    </div>
+    {% bootstrap_javascript jquery='full'%}
+</body>
+</html>

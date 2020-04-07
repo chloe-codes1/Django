@@ -15,3 +15,6 @@
 .local/
 
 .ipython/
+
+__pycache__/
+
