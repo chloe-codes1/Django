@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block body %}
+
+
+    {% if request.resolver_match.url_name == 'create' %}
+
+    <h2>Write a post</h2>
+    
+    {% else %}
+
+    <h2>Edit post</h2>
+
+    {% endif %}
+    
+    <!-- loop 활용-->
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="fieldWrapper">
+                {{ field.errors }}
+                {{ field.label_tag }} <br> 
+                
+                {{ field }}
+                {% if field.help_text %}
+                
+                <p class="help">{{ field.help_text|safe }}</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <!-- bootstrap4 사용 -->
+    <form action="" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button class="btn btn-primary"> Submit</button>
+    </form>
+
+{% endblock %}
