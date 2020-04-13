@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load bootstrap4 %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram - {% block title %}{% endblock %} </title>
+    {% block css %}
+    {% endblock %}
+    {% bootstrap_css %}
+</head>
+<body>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+            <div class="alert alert-{% if message.tags %}{% endif %}" role=alert>{{ message }}</li>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+  <nav class="navbar navbar-expand-md navbar-light bg-dark border border-left-0 border-right-0 border-top-0 border-white py-1 mb-5">
+  <a class="navbar-brand" href="/posts/"><strong class="text-white">Home</strong></a>
+  <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-dark "><i class="fas fa-bars" style="color:#fff; font-size:25px;"></i></span>
+  </button>
+  <div class="collapse navbar-collapse " id="navbarTogglerDemo03">
+    <ul class="navbar-nav ml-auto mt-2 mt-md-0 p-2">
+      <li class="nav-item active mx-2">
+        <a class="nav-link text-white" href="{% url 'accounts:signup' %}" style='font-size:22px;'>Sign Up<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item mx-2">
+        <a class="nav-link text-white" href="{% url 'posts:create' %}" style='font-size:22px;'>Write a Post </a>
+      </li>
+    </ul>
+    </div>
+</nav>
+
+<div class="container m-auto pt-3">
+
+    {% block content %}
+    {% endblock %}
+</div>
+    <p class='ml-5 mt-4'>
+        <a href="{% url 'posts:index' %}" class="text-primary ml-3 mr-3"><strong>Posts</strong></a> 
+        <a href="{% url 'accounts:index' %}" class="text-warning"><strong>User List</strong></a> 
+    </p>
+    {% bootstrap_javascript jquery='full'%}
+</body>
+</html>
