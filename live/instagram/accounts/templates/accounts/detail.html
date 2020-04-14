@@ -2,7 +2,16 @@
 
 {% block content %}
 
-<h1>{{user.pk}}: {{user.username}}</h1>
+
+<div class="card" style="width: 18rem;">
+<h1>{{user.username}}'s Profile</h1>
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <p class="mt-4">First name: <strong>{{user.first_name}}</strong></p>
+    <p>Last name: <strong>{{user.last_name}}</strong></p>
+    <p>Email: <strong>{{user.email}}</strong></p>
+  </div>
+</div>
 
 {% if request.user == user %}
 

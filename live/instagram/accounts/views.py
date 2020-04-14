@@ -56,7 +56,7 @@ def signin(request):
             
             # [단축평가]
             # or 일 때, 앞에가 False면 뒤에도 검사!
-            return redirect(request.GET.get('next') or 'accounts:index')
+            return redirect(request.GET.get('next') or 'posts:index')
     else:    
         form = AuthenticationForm()
     context = {
@@ -82,7 +82,7 @@ def update(request):
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('articles:index')
+            return redirect('posts:index')
     else:
         form = CustomUserChangeForm(instance=request.user)
     context ={

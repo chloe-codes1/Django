@@ -6,6 +6,17 @@ New Post
 {% endblock  %}
 
 {% block content %}
+
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+
 <!--
     분기의 기준은 url_name 이다!
     path로 하면 url이 바뀔따마다 바꿔줘야함..! (불-편)
