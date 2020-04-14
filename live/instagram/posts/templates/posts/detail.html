@@ -2,13 +2,23 @@
 
 
 {% block title %}
-
-Post #{{post.pk}}
-
+    Post #{{post.pk}}
 {% endblock  %}
 
 {% block content %}
     <h1> #{{post.pk}} {{post.title}}</h1>
+    <p>Creation Time: {{post.created_at}}</p>
+    <p>Last Modified Time: {{post.updated_at}}</p>
+    <hr>
     <p> {{post.content}} </p>
+
+    <form action="{% url 'posts:update' post.pk %}" class="d-inline" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-warning mt-3 mr-1">Edit</button>
+    </form>
+    <form action="{% url 'posts:delete' post.pk %}" class="d-inline" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-danger mt-3">Delete</button>
+    </form>
 
 {% endblock  %}

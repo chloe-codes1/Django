@@ -2,19 +2,38 @@
 {% load bootstrap4 %}
 
 {% block title %}
-
-List
-
+    List
 {% endblock %}
 
 {% block content %}
-    <button class="btn btn-primary my-5"><a href="{% url 'posts:create' %}" class="text-white">Add post</a></button>
-    
-    {% for post in posts %}
-       <p> #{{post.pk}} {{ post.title }} </p>
-       <p> <a href="{% url 'posts:detail' post.pk %}">Detail</a></p>    
-    {% empty %}
-    <h3 class="text-center">There is no post</h3>
-    {% endfor %}
-
+<h1 class="text-center">Posts</h1>
+<div class="mb-5 text-right">
+    <button class="btn btn-primary"><a href="{% url 'posts:create' %}" class="text-white">Add post</a></button>
+</div>    
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Creation TIme</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in posts %}
+            <tr>
+                <th scope="row"> {{post.pk}} </th> 
+                <td>
+                    <a href="{% url 'posts:detail' post.pk %}">
+                        {{ post.title }} 
+                    </a>
+                </td>
+                <td>{{ post.created_at|date:'Y-m-d H:i'}}</td>
+                </a>    
+            </tr>
+            {% empty %}
+                <h3 class="text-center">There is no post</h3>
+            {% endfor %}
+        </tbody>
+    </table>
+<hr>
 {% endblock  %}

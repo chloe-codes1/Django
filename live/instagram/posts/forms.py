@@ -27,3 +27,6 @@ class PostForm(forms.ModelForm):
         model = Post
         # 다 때려박아
         fields = '__all__'
+
+        # 제목은 못고치게 해볼까..
+        # exclude = ['title']

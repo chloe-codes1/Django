@@ -6,12 +6,25 @@ New Post
 {% endblock  %}
 
 {% block content %}
+<!--
+    분기의 기준은 url_name 이다!
+    path로 하면 url이 바뀔따마다 바꿔줘야함..! (불-편)
+-->
+<div class="mb-5">
+{% if request.resolver_match.url_name == 'create' %}
+    <h2>Add Post</h2>
+{% else %}
+    <h2>Edit Post</h2>
+{% endif %}
+</div>
     <form action="" method="POST">
     {% csrf_token %}
 
-    {{ form.as_p }}
+    <!--bootstrap4 활용하긔-->
+    {% bootstrap_form form %}
 
-    <button>Save</button>
+    <!--button은 input type:submit과 같은 역할을 한다!-->
+    <button class="btn btn-success">Save</button>
     </form>
 
 {% endblock  %}

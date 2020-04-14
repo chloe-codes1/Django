@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram - {% block title %}{% endblock %} </title>
+    <title>Instagram {% block title %}{% endblock %} </title>
     {% block css %}
     {% endblock %}
     {% bootstrap_css %}
@@ -26,25 +26,45 @@
   </button>
   <div class="collapse navbar-collapse " id="navbarTogglerDemo03">
     <ul class="navbar-nav ml-auto mt-2 mt-md-0 p-2">
+     {% if user.is_authenticated %}
+      <li class="nav-item active mx-2 mt-2">
+        <strong class="text-white">Hello, {{user}}!</strong>
+      </li> 
       <li class="nav-item active mx-2">
-        <a class="nav-link text-white" href="{% url 'accounts:signup' %}" style='font-size:22px;'>Sign Up<span class="sr-only">(current)</span></a>
+        <a class="nav-link text-white" href="{% url 'accounts:signout' %}" style='font-size:22px;'>Log-out<span class="sr-only">(current)</span></a>
+        </li>
+      {% else %}
+      <li class="nav-item active mx-2">
+        <a class="nav-link text-white" href="{% url 'accounts:signin' %}" style='font-size:22px;'>Log-in<span class="sr-only">(current)</span></a>
       </li>
+      <li class="nav-item active mx-2">
+        <a class="nav-link text-white" href="{% url 'accounts:signup' %}" style='font-size:22px;'>Join<span class="sr-only">(current)</span></a>
+      </li>
+      
+      {% endif %}
+      
       <li class="nav-item mx-2">
         <a class="nav-link text-white" href="{% url 'posts:create' %}" style='font-size:22px;'>Write a Post </a>
       </li>
     </ul>
     </div>
 </nav>
+무여{{user.class}}
 
 <div class="container m-auto pt-3">
 
     {% block content %}
     {% endblock %}
 </div>
-    <p class='ml-5 mt-4'>
+
+{% if request.resolver_match.url_name == 'signin' or request.resolver_match.url_name == 'signup'%}
+
+{% else %}
+    <p class='m-auto pl-5 pt-4 w-75'>
         <a href="{% url 'posts:index' %}" class="text-primary ml-3 mr-3"><strong>Posts</strong></a> 
         <a href="{% url 'accounts:index' %}" class="text-warning"><strong>User List</strong></a> 
     </p>
+{% endif %}
     {% bootstrap_javascript jquery='full'%}
 </body>
 </html>
