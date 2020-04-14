@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}
+New Post
+{% endblock  %}
+
+{% block content %}
+    <form action="" method="POST">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button>Save</button>
+    </form>
+
+{% endblock  %}
