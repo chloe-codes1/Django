@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h2>DETAIL</h2>
+	<hr>
+	<h3>{{ article.pk }}번글</h3>
+	<p>제목: {{ article.title }}</p>
+	<p>내용: {{ article.content }}</p>
+	<p>생성 시각: {{ article.created_at }}</p>
+	<p>수정 시각: {{ article.updated_at }}</p>
+	<a href="{% url 'articles:index' %}">BACK</a>
+
+	<br>
+	<hr>
+	<h3>댓글 목록 | <small> ({{article.comments.count }}) </small></h3>
+	
+	<!-- 1번글에 속한 모든 댓글을 가져와서 다 보여준다 -->
+	{% for comment in article.comments.all %}
+		<p> {{comment.content}}</p>
+
+
+	{% empty %}
+	<p> There's no comments.</p>
+
+	{% endfor %}
+
+	<br>
+	<hr>
+	<h3>댓글 작성</h3>
+	<form action="{% url 'articles:comments_create' article.pk %}" method='POST'>
+		{% csrf_token %}
+		{{ comment_form.as_p}}
+		<button> Submit</button>
+	</form>
+{% endblock %}

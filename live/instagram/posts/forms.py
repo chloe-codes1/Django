@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post,Comment
 
 class PostForm(forms.ModelForm):
     title = forms.CharField(
@@ -30,3 +30,9 @@ class PostForm(forms.ModelForm):
 
         # 제목은 못고치게 해볼까..
         # exclude = ['title']
+
+    
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']

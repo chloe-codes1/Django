@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, CommentForm
 
 
 # Create your views here.
@@ -22,7 +22,9 @@ def create(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
-            post = form.save()
+            post = form.save(commit=False) # 추가함
+            post.user = request.user
+            post.save()
             return redirect('posts:index')
         messages.warning(request, 'Please check the form submitted')
     else:
@@ -34,8 +36,10 @@ def create(request):
 
 def detail(request,pk):
     post = get_object_or_404(Post, id=pk)
+    form = CommentForm()
     context = {
-        'post': post
+        'post': post,
+        'form': form,
     }
     return render(request, 'posts/detail.html',context)
 

@@ -21,4 +21,19 @@
         <button class="btn btn-danger mt-3">Delete</button>
     </form>
 
+    <br>
+    <hr>
+    <h3>Comments</h3>
+    {% for comment in post.comments.all %}
+        <p>{{comment.username}} : {{comment.content}}</p>
+    {% endfor %}
+    <br>
+    <hr>
+        <form action="{% url 'posts:comments_create' post.pk %}" method="POST">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        <button class="btn btn-primary">Add comment</button>
+    </form>
+
+
 {% endblock  %}
