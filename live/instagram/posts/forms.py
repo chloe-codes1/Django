@@ -28,11 +28,21 @@ class PostForm(forms.ModelForm):
         # 다 때려박아
         fields = '__all__'
 
-        # 제목은 못고치게 해볼까..
-        # exclude = ['title']
+        # 사용자가 글 작성자가 누군지 선택하게 하면 안되므로
+        exclude = ['user']
 
     
 class CommentForm(forms.ModelForm):
+    content = forms.CharField(
+        label='Comment',
+        help_text='What do you think about this post?',
+        widget=forms.Textarea(
+            attrs={
+                'row':2,
+                'col':10,
+            }
+        )
+    )
     class Meta:
         model = Comment
         fields = ['content']

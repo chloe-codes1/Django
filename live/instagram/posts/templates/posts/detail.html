@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load bootstrap4 %}
 
 {% block title %}
     Post #{{post.pk}}
@@ -12,20 +12,20 @@
     <hr>
     <p> {{post.content}} </p>
 
-    <form action="{% url 'posts:update' post.pk %}" class="d-inline" method="POST">
-        {% csrf_token %}
-        <button class="btn btn-warning mt-3 mr-1">Edit</button>
-    </form>
+    {% if post.user == request.user %}
+        <a class="btn btn-warning mt-3 mr-1" href="{% url 'posts:update' post.pk %}">Edit</a>
     <form action="{% url 'posts:delete' post.pk %}" class="d-inline" method="POST">
         {% csrf_token %}
         <button class="btn btn-danger mt-3">Delete</button>
     </form>
 
+    {% endif %}
+
     <br>
     <hr>
-    <h3>Comments</h3>
+    <h4>Comments | <small>({{post.comments.count}})</small></h4>
     {% for comment in post.comments.all %}
-        <p>{{comment.username}} : {{comment.content}}</p>
+        <p> <strong>{{comment.user}}</strong> : {{comment.content}}</p>
     {% endfor %}
     <br>
     <hr>
@@ -34,6 +34,5 @@
         {% bootstrap_form form %}
         <button class="btn btn-primary">Add comment</button>
     </form>
-
 
 {% endblock  %}
