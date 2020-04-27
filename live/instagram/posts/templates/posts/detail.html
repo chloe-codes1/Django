@@ -11,6 +11,8 @@
     <p>Last Modified Time: {{post.updated_at}}</p>
     <hr>
     <p> {{post.content}} </p>
+    <!--image 출력용-->
+    <img src="{{post.image.url}}"/>
 
     {% if post.user == request.user %}
         <a class="btn btn-warning mt-3 mr-1" href="{% url 'posts:update' post.pk %}">Edit</a>
