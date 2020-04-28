@@ -10,9 +10,21 @@
     <p>Creation Time: {{post.created_at}}</p>
     <p>Last Modified Time: {{post.updated_at}}</p>
     <hr>
-    <p> {{post.content}} </p>
-    <!--image 출력용-->
-    <img src="{{post.image.url}}"/>
+
+    <!--with 사용해서 caching하기-->
+    {% with post_like_users=post.like_users.all %}
+        <a href="{% url 'posts:like' post.pk %}">
+        {% if request.user in post_like_users %}
+            <i class="fas fa-heart fa-lg text-danger"></i>
+        {% else %}
+            <i class="far fa-heart fa-lg text-danger animated infinite bounce delay-1s"></i>
+        {% endif %}
+        </a>
+
+    <!-- <p>{{post.like_users.count}} likes</p> -->
+        <p>{{post_like_users|length}} likes</p>
+    {% endwith %}
+
 
     {% if post.user == request.user %}
         <a class="btn btn-warning mt-3 mr-1" href="{% url 'posts:update' post.pk %}">Edit</a>
@@ -20,8 +32,14 @@
         {% csrf_token %}
         <button class="btn btn-danger mt-3">Delete</button>
     </form>
-
     {% endif %}
+
+    <p> {{post.content}} </p>
+    <!--image 출력용-->
+    <img src="{{post.image.url}}"/>
+    <img src="{{post.image_thumbnail.url}}"/>
+
+
 
     <br>
     <hr>

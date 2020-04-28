@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'users',
     'articles',
+    'onetomany',
+    'manytomany',
 ]
 
 MIDDLEWARE = [

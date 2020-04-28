@@ -58,7 +58,7 @@ def update(request, pk):
     #글 작성한 본인인지 확인
     if request.user == post.user:
         if request.method == 'POST':
-            form = PostForm(request.POST, instance=post)
+            form = PostForm(request.POST, request.FILES, instance=post)
             if form.is_valid():
                 post = form.save(commit=False)
                 post.user = request.user
@@ -101,3 +101,18 @@ def comments_create(request, pk):
 
         # ver2) 401 page로 보내버리기
         # return HttpResponse(status=401)
+
+def like(request, pk):
+    post = get_object_or_404(Post, id=pk)
+    # 좋아요를 누른적이 있다면, => DB에 저장되어 있으면
+    # ver1)
+    # if request.user in post.like_users.all():
+    # ver2)
+    if post.like_users.filter(id=request.user.pk).exists():
+        # 취소
+        post.like_users.remove(request.user)
+    # 그게 아니면, 
+    else:
+        #좋아요
+        post.like_users.add(request.user)
+    return redirect('posts:detail', post.pk)
