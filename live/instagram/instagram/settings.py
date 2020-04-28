@@ -130,3 +130,6 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
+
+# 내가 만든 User model 사용한다고 선언
+AUTH_USER_MODEL = 'accounts.User'
