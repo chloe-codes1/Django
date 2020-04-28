@@ -45,6 +45,8 @@
         <p class="mt-4">First name: <strong>{{user.first_name}}</strong></p>
         <p>Last name: <strong>{{user.last_name}}</strong></p>
         <p>Email: <strong>{{user.email}}</strong></p>
+            <a href="{% url 'accounts:follow' user.pk %}">Follow</a>
+            <p>{{ user.follwers.all|length}} followers</p>
       </div>
       <div class="modal-footer">
          {% if request.user == user %}

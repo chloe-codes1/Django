@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model, login as auth_login, logout as auth_logout
 # from django.contrib.auth.models import User 
 # # -> User class는 내부에 정의되어 있으므로 get_user_model method로 호출한다!
-from .forms import CustomUserChangeForm
+from .forms import CustomUserChangeForm, CustomUserCreationForm
 from django.views.decorators.http import require_POST
 
 
@@ -24,12 +24,12 @@ def signup(request):
         return redirect('posts:index')
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('accounts:index')
     else:
-        form = UserCreationForm()
+        form = CustomUserCreationForm()
     context = {
         'form':form
     }
@@ -89,3 +89,18 @@ def update(request):
         'form':form
     }
     return render(request, 'accounts/update.html', context)
+
+def follow(request, pk):
+    User = get_user_model()
+    # 팔로우 당하는 사람
+    user = get_object_or_404(User, id=pk)
+    if user != request.user:
+        # 팔로우 요청한 사람 => request.user
+        # 팔로우가 되어있다면
+        if user.followers.filter(pk=request.user.pk).exists():
+            # 삭제
+            user.followers.remove(request.user)
+        else:
+            # 추가
+            user.followers.add(request.user)
+    return redirect('accounts:detail', user.pk)
