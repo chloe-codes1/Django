@@ -89,7 +89,8 @@ def update(request):
         'form':form
     }
     return render(request, 'accounts/update.html', context)
-
+    
+@login_required
 def follow(request, pk):
     User = get_user_model()
     # 팔로우 당하는 사람

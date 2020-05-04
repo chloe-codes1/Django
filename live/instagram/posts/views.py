@@ -1,20 +1,40 @@
+import hashlib
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseForbidden #Forbidden 은 403 code를 class로 만든 것!
+from django.db.models import Count, Prefetch
 
-from .models import Post
+from .models import Post, Comment
 from .forms import PostForm, CommentForm
+
 
 
 # Create your views here.
 
 def index(request):
     # primary key 역순으로 정렬하긔
-    posts = Post.objects.order_by('-pk')
+    # posts = Post.objects.order_by('-pk')
+
+    # 1) 댓글 수
+    # posts = Post.objects.annotate(comment_set_count=Count('comment')).order_by('-pk')
+    
+    # 2) 게시글 작성자 이름 출력
+    # posts = Post.objects.select_related('user').order_by('-pk')
+
+    # 3) 댓글들 출력
+    # posts = Post.objects.prefetch_related('comments').order_by('-pk')
+
+    # 4) 게시글마다 댓글 작성자 이름과 댓글들 출력
+    posts = Post.objects.prefetch_related(
+                Prefetch('comments',
+                queryset = Comment.objects.select_related('user')
+                )
+            ).order_by('-pk')
+
     context = {
-        'posts': posts
+        'posts': posts,
     }
     return render(request, 'posts/index.html',context)
 

@@ -17,7 +17,9 @@
             <tr>
                 <th>#</th>
                 <th>Title</th>
+                <th>Writer</th>
                 <th>Creation Time</th>
+                <th>Comments</th>
             </tr>
        </thead>
         <tbody>
@@ -29,8 +31,16 @@
                         {{ post.title }} 
                     </a>
                 </td>
+                <td>
+                    <a href="{% url 'accounts:detail' post.user.pk %}">
+                        {{ post.user.username}}
+                    </a>                
+                </td>
                 <td>{{ post.created_at|date:'Y-m-d H:i'}}</td>
-                </a>    
+                <td>
+                    {{post.comments.count}}
+                
+                </td>
             </tr>
             {% empty %}
                 <h3 class="text-center">There is no post</h3>

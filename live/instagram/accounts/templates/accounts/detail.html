@@ -33,4 +33,23 @@
 {% endif %}
     <p>{{ user_followers|length}} followers</p>
     <p>You're following {{ user.followings.count}}</p>
+<br>
+<br>
+<hr>
+<h3>Your Posts</h3>
+
+{% for post in user.post_set.all %}
+  <a href="{% url 'posts:detail' post.pk%}">
+    <p>{{post.title}}</p>
+  </a>
+{% endfor %}
+<br>
+<h3>Liked Posts</h3>
+
+{% for post in user.like_aposts.all %}
+  <a href="{% url 'posts:detail' apost.pk%}">
+    <p>{{post.title}}</p>
+  </a>
+{% endfor %}
+
 {% endblock  %}
