@@ -19,3 +19,7 @@
 __pycache__/
 
 .vscode/
+
+debug-quest
+
+venv
