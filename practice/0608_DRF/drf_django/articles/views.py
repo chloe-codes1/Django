@@ -21,6 +21,7 @@ def create(request):
     if serializer.is_valid():
         serializer.save(user=request.user)
         return Response(serializer.data)
+    return Response('error')
 
 @api_view(['GET'])
 def detail(request, article_pk):

@@ -50,12 +50,16 @@ INSTALLED_APPS = [
     'allauth.account',
     'rest_auth.registration',
 
+    # CORS
+    'corsheaders',
+
     # my apps
     'accounts',
     'articles',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -147,3 +151,7 @@ REST_FRAMEWORK = {
 
 #django site id
 SITE_ID = 1
+
+
+# CORS Allow
+CORS_ORIGIN_ALLOW_ALL = True
