@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap_pagination %}
+
+{% block content %}
+
+<h1>Articles</h1>
+
+<ul>
+    {% for article in page_obj %}
+        <li>{{article.title}}</li>
+    {% endfor %}
+</ul>
+
+{% bootstrap_paginate page_obj range=10 show_prev_next="false" show_first_last="true" %}
+
+{% endblock %}
